@@ -1,3 +1,4 @@
+// CollapsibleExample.js
 import React, { useState, useEffect } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -9,17 +10,15 @@ function CollapsibleExample() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        // Memeriksa apakah ada data login di localStorage
-        const loggedInUser = localStorage.getItem("loggedInUser");
-        if (loggedInUser) {
-            setIsLoggedIn(true); // Jika ada, set isLoggedIn menjadi true
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn === 'true') {
+            setIsLoggedIn(true);
         }
     }, []);
 
     const handleLogout = () => {
-        // Lakukan proses logout di sini, misalnya menghapus token dari local storage
-        localStorage.removeItem("loggedInUser"); // Hapus data login dari localStorage
-        setIsLoggedIn(false); // Set isLoggedIn menjadi false
+        localStorage.setItem('isLoggedIn', 'false');
+        setIsLoggedIn(false);
     };
 
     return (

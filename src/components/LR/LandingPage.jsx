@@ -1,6 +1,7 @@
 import React from "react";
-import image from '../assets/Logo Dietku.png';
+import image from '../../assets/Logo Dietku.png';
 import TabLandingPage from "./TabLandingPage";
+
 
 function LandingPage() {
     return (

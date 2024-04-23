@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Pic from '../assets/slide2.png';
-import Button from 'react-bootstrap/Button'; // Gambar diimpor dari file lokal
+import Button from 'react-bootstrap/Button'; 
 
 function GridExample() {
     return (

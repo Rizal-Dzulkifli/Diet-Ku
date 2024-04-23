@@ -1,6 +1,6 @@
-import FormLandingPage from "./FormLandingPage";
+import FormLandingPage from "../FormLandingPage";
 import Button from 'react-bootstrap/Button';
-import image from '../assets/g.png';
+import image from '../../assets/g.png';
 import { Form } from 'react-bootstrap';
 import React, { useState } from "react";
 const listForm = [

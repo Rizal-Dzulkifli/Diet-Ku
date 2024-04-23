@@ -88,8 +88,8 @@ function App() {
               <Form onSubmit={calcBmi}>
                 <div >
                   <label><h5>Apa jenis kelamin anda ?</h5></label>
-                  <Row class >
-                    <Col className="row m-2"><ToggleButton
+                  <Row >
+                    <Col className=" m-2"><ToggleButton
                       name='gender'
                       className="mb-2"
                       id="male"
@@ -117,36 +117,39 @@ function App() {
                       }}
                     >
                       Laki-Laki
-                    </ToggleButton></Col>
-                    <Col className="row m-2"><ToggleButton
-                      name='gender'
-                      className="mb-2"
-                      id="female"
-                      type="checkbox"
-                      variant="outline-primary"
-                      checked={gender === 'female'}
-                      value="female"
-                      onChange={() => setGender(gender === 'female' ? '' : 'female')}
-                      style={{
-                        backgroundColor: gender === 'female' ? '#FF00A8' : '',
-                        color: gender === 'female' ? '#FFF' : '#FF00A8',
-                        border: '1px solid #FF00A8',
-                      }}
-                      onMouseOver={(e) => {
-                        if (gender !== 'female') {
-                          e.target.style.backgroundColor = '#FF00A8';
-                          e.target.style.color = '#FFF';
-                        }
-                      }}
-                      onMouseOut={(e) => {
-                        if (gender !== 'female') {
-                          e.target.style.backgroundColor = '';
-                          e.target.style.color = '#FF00A8';
-                        }
-                      }}
-                    >
-                      Perempuan
-                    </ToggleButton></Col>
+                    </ToggleButton>
+                    </Col>
+                    <Col className=" m-2">
+                      <ToggleButton
+                        name='gender'
+                        className="mb-2"
+                        id="female"
+                        type="checkbox"
+                        variant="outline-primary"
+                        checked={gender === 'female'}
+                        value="female"
+                        onChange={() => setGender(gender === 'female' ? '' : 'female')}
+                        style={{
+                          backgroundColor: gender === 'female' ? '#FF00A8' : '',
+                          color: gender === 'female' ? '#FFF' : '#FF00A8',
+                          border: '1px solid #FF00A8',
+                        }}
+                        onMouseOver={(e) => {
+                          if (gender !== 'female') {
+                            e.target.style.backgroundColor = '#FF00A8';
+                            e.target.style.color = '#FFF';
+                          }
+                        }}
+                        onMouseOut={(e) => {
+                          if (gender !== 'female') {
+                            e.target.style.backgroundColor = '';
+                            e.target.style.color = '#FF00A8';
+                          }
+                        }}
+                      >
+                        Perempuan
+                      </ToggleButton>
+                    </Col>
                   </Row>
 
                 </div>
@@ -165,8 +168,7 @@ function App() {
                 <div className="d-grid gap-2">
                   <Button variant="primary " className='btn' type='submit' size="lg"
                     style={{
-                      marginRight: "30%",
-                      marginLeft: "30%",
+
                       border: "none",
                       backgroundColor: "#4AB6C5",
                       transition: "background-color 0.3s"

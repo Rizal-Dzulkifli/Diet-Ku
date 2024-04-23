@@ -7,7 +7,6 @@ import Bmi from './Bmi.jsx';
 
 function LandingPage() {
     return (
-        
         <div>
             <Navbar />
             <Slide />
