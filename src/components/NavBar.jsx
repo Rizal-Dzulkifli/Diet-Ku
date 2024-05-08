@@ -20,6 +20,9 @@ function CollapsibleExample() {
         localStorage.setItem('isLoggedIn', 'false');
         setIsLoggedIn(false);
     };
+    const handleClick = () => {
+        triggerEvent(2);
+    };
 
     return (
         <Navbar style={{ backgroundColor: '#80DCF9' }} collapseOnSelect expand="sm" className="px-4">
@@ -32,16 +35,24 @@ function CollapsibleExample() {
                     {/* Kosong */}
                 </Nav>
                 <Nav className="d-flex justify-content-center align-items-center">
-                    <Nav.Link href="#features" style={{ color: '#2BB72F' }}>
+                    <Nav.Link as={Link}
+                        to="/" style={{ color: '#2BB72F' }}>
                         <h5>Beranda</h5>
                     </Nav.Link>
-                    <Nav.Link href="#pricing" style={{ color: '#2BB72F' }}>
+                    <Nav.Link as={Link}
+                        to="/resep" style={{ color: '#2BB72F' }}>
+                        <h5 >Resep</h5>
+                    </Nav.Link>
+                    <Nav.Link as={Link}
+                        to="/kalkulator" style={{ color: '#2BB72F' }}>
+                        <h5 >Kalkulator</h5>
+                    </Nav.Link>
+                    <Nav.Link as={Link}
+                        to="/tentang-kami" style={{ color: '#2BB72F' }}>
                         <h5>Tentang Kami</h5>
                     </Nav.Link>
-                    <Nav.Link href="#pricing" style={{ color: '#2BB72F' }}>
-                        <h5>Program</h5>
-                    </Nav.Link>
-                    <Nav.Link href="#deets" style={{ color: '#2BB72F' }}>
+                    <Nav.Link as={Link}
+                        to="/blog" style={{ color: '#2BB72F' }}>
                         <h5>Blog</h5>
                     </Nav.Link>
                     {isLoggedIn ? (
@@ -84,7 +95,8 @@ function CollapsibleExample() {
                             </Button>
                             <Button
                                 as={Link}
-                                to="/login/daftar"
+                                to="/masuk"
+                                onClick={handleClick}
                                 variant="outline-success"
                                 style={{
                                     width: '100px',

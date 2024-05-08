@@ -1,17 +1,16 @@
 import React from "react";
 import Navbar from './NavBar.jsx';
-import Slide from './SlideTop.jsx';
-import Topik from './Topik.jsx';
+import Blogt from './blogtop.jsx';
+import Blogc from './blogcard.jsx';
+
 
 
 function LandingPage() {
     return (
         <div>
             <Navbar />
-            {/* <Resep /> */}
-            <Slide />
-            <Topik />
-   
+            <Blogt />
+            <Blogc />
         </div>
     )
 }

@@ -10,7 +10,6 @@ function UncontrolledExample() {
      // Atur tinggi slide di sini
   
     objectFit: 'contain',
-    backgroundColor:'#ffffff'
      // Menjaga aspek rasio gambar
   };
   const captionStyle = {

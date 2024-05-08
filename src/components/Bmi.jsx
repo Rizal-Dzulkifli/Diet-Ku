@@ -78,11 +78,12 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-md-5" style={{ padding: '30px' }}>
-          <Card >
-            <Card.Header style={{ backgroundColor: '#4AB6C5' }}><h2 style={{ color: '#ffffff' }} className='text-center'>BMI Calculator</h2></Card.Header>
+    <div >
+      <div className="justify-content-center">
+        <div >
+          <Card style={{borderRadius: '0px',border:'0'}} >
+            <Card.Header style={{ backgroundColor: '#B5FFB4',border:'0',borderRadius: '0px',padding:'35px' }}><h2  className='text-left'><b>Kalkulator Body Mass Index (BMI)</b></h2>
+                                                                                              <h5>Gunakan kalkulator ini untuk menentukan berapa berat badan ideal anda.</h5></Card.Header>
             <Card.Body>
               <Card.Title></Card.Title>
               <Form onSubmit={calcBmi}>
