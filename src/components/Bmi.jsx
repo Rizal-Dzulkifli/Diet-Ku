@@ -1,5 +1,4 @@
 import Button from 'react-bootstrap/Button';
-import FormLandingPage from "./FormLandingPage";
 import Card from 'react-bootstrap/Card';
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
@@ -7,50 +6,24 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
-
 function App() {
   // State
   const [gender, setGender] = useState('male');
   const [age, setAge] = useState('');
-  const [weight, setWeight] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
   const [bmi, setBmi] = useState('');
   const [message, setMessage] = useState('');
-  const listForm = [
-    {
-      id: 1,
-      type: 'number',
-      value: { age },
-      label: 'Usia Anda:',
-      placeholder: 'Masukkan usia Anda',
-      onChange: (e) => setAge(e.target.value)
-    },
-    {
-      id: 2,
-      type: 'number',
-      value: { weight },
-      label: 'Berat Badan (kg):',
-      placeholder: 'Masukkan berat badan Anda',
-      onChange: (e) => setWeight(e.target.value)
-    },
-    {
-      id: 3,
-      type: 'number',
-      value: { height },
-      label: 'Tinggi Badan (cm):',
-      placeholder: 'Masukkan tinggi badan Anda',
-      onChange: (e) => setHeight(e.target.value)
-    }
-  ];
+
   // Function untuk menghitung BMI
   const calcBmi = (event) => {
     event.preventDefault(); // Mencegah pengiriman form
 
     // Mengambil nilai berat badan (kg) dan tinggi badan (cm) dari state
-    const weightKg = weight;
-    const heightCm = height;
+    const weightKg = parseFloat(weight);
+    const heightCm = parseFloat(height);
 
-    if (weightKg === 0 || heightCm === 0) {
+    if (!weightKg || !heightCm) {
       alert('Mohon masukkan berat badan dan tinggi yang valid');
     } else {
       // Menghitung BMI
@@ -78,19 +51,20 @@ function App() {
   }
 
   return (
-    <div >
-      <div className="justify-content-center">
-        <div >
-          <Card style={{borderRadius: '0px',border:'0'}} >
-            <Card.Header style={{ backgroundColor: '#B5FFB4',border:'0',borderRadius: '0px',padding:'35px' }}><h2  className='text-left'><b>Kalkulator Body Mass Index (BMI)</b></h2>
-                                                                                              <h5>Gunakan kalkulator ini untuk menentukan berapa berat badan ideal anda.</h5></Card.Header>
-            <Card.Body>
-              <Card.Title></Card.Title>
-              <Form onSubmit={calcBmi}>
-                <div >
-                  <label><h5>Apa jenis kelamin anda ?</h5></label>
-                  <Row >
-                    <Col className=" m-2"><ToggleButton
+    <div className="justify-content-center">
+      <div>
+        <Card style={{ borderRadius: '0px', border: '0' }}>
+          <Card.Header style={{ backgroundColor: '#B5FFB4', border: '0', borderRadius: '0px', padding: '35px' }}>
+            <h2 className='text-left'><b>Kalkulator Body Mass Index (BMI)</b></h2>
+            <h5>Gunakan kalkulator ini untuk menentukan berapa berat badan ideal anda.</h5>
+          </Card.Header>
+          <Card.Body>
+            <Form onSubmit={calcBmi}>
+              <div>
+                <label><h5>Apa jenis kelamin anda?</h5></label>
+                <Row>
+                  <Col className="m-2">
+                    <ToggleButton
                       name='gender'
                       className="mb-2"
                       id="male"
@@ -98,7 +72,7 @@ function App() {
                       variant="outline-primary"
                       checked={gender === 'male'}
                       value="male"
-                      onChange={() => setGender(gender === 'male' ? '' : 'male')}
+                      onChange={() => setGender('male')}
                       style={{
                         backgroundColor: gender === 'male' ? '#4AB6C5' : '',
                         color: gender === 'male' ? '#FFF' : '#4AB6C5',
@@ -119,79 +93,94 @@ function App() {
                     >
                       Laki-Laki
                     </ToggleButton>
-                    </Col>
-                    <Col className=" m-2">
-                      <ToggleButton
-                        name='gender'
-                        className="mb-2"
-                        id="female"
-                        type="checkbox"
-                        variant="outline-primary"
-                        checked={gender === 'female'}
-                        value="female"
-                        onChange={() => setGender(gender === 'female' ? '' : 'female')}
-                        style={{
-                          backgroundColor: gender === 'female' ? '#FF00A8' : '',
-                          color: gender === 'female' ? '#FFF' : '#FF00A8',
-                          border: '1px solid #FF00A8',
-                        }}
-                        onMouseOver={(e) => {
-                          if (gender !== 'female') {
-                            e.target.style.backgroundColor = '#FF00A8';
-                            e.target.style.color = '#FFF';
-                          }
-                        }}
-                        onMouseOut={(e) => {
-                          if (gender !== 'female') {
-                            e.target.style.backgroundColor = '';
-                            e.target.style.color = '#FF00A8';
-                          }
-                        }}
-                      >
-                        Perempuan
-                      </ToggleButton>
-                    </Col>
-                  </Row>
-
-                </div>
-                {listForm.map(form => (
-                  <FormLandingPage
-                    key={form.id}
-                    id={form.id}
-                    value={form.value}
-                    type={form.type}
-                    label={form.label}
-                    placeholder={form.placeholder}
-                    onChange={form.onChange}
-                  />
-                ))}
-
-                <div className="d-grid gap-2">
-                  <Button variant="primary " className='btn' type='submit' size="lg"
-                    style={{
-
-                      border: "none",
-                      backgroundColor: "#4AB6C5",
-                      transition: "background-color 0.3s"
-
-                    }}
-                    onMouseOver={(e) => e.target.style.backgroundColor = "#4AA0AC"}
-                    onMouseOut={(e) => e.target.style.backgroundColor = "#4AB6C5"}>
-                    Hitung BMI
-                  </Button>
-                </div>
-                {/* <div>
-                  <button className='btn' type='submit'>Hitung BMI</button>
-                  <button className='btn btn-outline' onClick={reload}>Reload</button>
-                </div> */}
-              </Form>
-              <div className='text-center'>
-                <h3>Perhitungan BMI kamu Adalah: {bmi}</h3>
-                <p>{message}</p>
+                  </Col>
+                  <Col className="m-2">
+                    <ToggleButton
+                      name='gender'
+                      className="mb-2"
+                      id="female"
+                      type="checkbox"
+                      variant="outline-primary"
+                      checked={gender === 'female'}
+                      value="female"
+                      onChange={() => setGender('female')}
+                      style={{
+                        backgroundColor: gender === 'female' ? '#FF00A8' : '',
+                        color: gender === 'female' ? '#FFF' : '#FF00A8',
+                        border: '1px solid #FF00A8',
+                      }}
+                      onMouseOver={(e) => {
+                        if (gender !== 'female') {
+                          e.target.style.backgroundColor = '#FF00A8';
+                          e.target.style.color = '#FFF';
+                        }
+                      }}
+                      onMouseOut={(e) => {
+                        if (gender !== 'female') {
+                          e.target.style.backgroundColor = '';
+                          e.target.style.color = '#FF00A8';
+                        }
+                      }}
+                    >
+                      Perempuan
+                    </ToggleButton>
+                  </Col>
+                </Row>
               </div>
-            </Card.Body>
-          </Card>
-        </div>
+
+              <Form.Group controlId="formAge">
+                <Form.Label>Usia Anda:</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={age}
+                  placeholder="Masukkan usia Anda"
+                  onChange={(e) => setAge(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="formWeight">
+                <Form.Label>Berat Badan (kg):</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={weight}
+                  placeholder="Masukkan berat badan Anda"
+                  onChange={(e) => setWeight(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="formHeight">
+                <Form.Label>Tinggi Badan (cm):</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={height}
+                  placeholder="Masukkan tinggi badan Anda"
+                  onChange={(e) => setHeight(e.target.value)}
+                />
+              </Form.Group>
+
+              <div className="d-grid gap-2">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  size="lg"
+                  style={{
+                    border: "none",
+                    backgroundColor: "#4AB6C5",
+                    transition: "background-color 0.3s"
+                  }}
+                  onMouseOver={(e) => e.target.style.backgroundColor = "#4AA0AC"}
+                  onMouseOut={(e) => e.target.style.backgroundColor = "#4AB6C5"}
+                >
+                  Hitung BMI
+                </Button>
+              </div>
+            </Form>
+            <div className='text-center'>
+              <h3>Perhitungan BMI kamu Adalah: {bmi}</h3>
+              <p>{message}</p>
+            </div>
+          </Card.Body>
+        </Card>
       </div>
     </div>
   );
