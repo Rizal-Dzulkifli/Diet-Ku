@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col } from 'react-bootstrap';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import image from '../../assets/g.png';
-import dummyData from '../../dummy.json';
 import Form from 'react-bootstrap/Form';
-
 
 function FormSignIn({ onLogin, triggerEvent }) {
     const [enteredEmail, setEnteredEmail] = useState("");
@@ -12,7 +12,7 @@ function FormSignIn({ onLogin, triggerEvent }) {
     const [passwordIsValid, setPasswordIsValid] = useState();
     const [formIsValid, setFormIsValid] = useState(false);
     const [loginError, setLoginError] = useState("");
-    
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Set nilai awal input email dan password menjadi string kosong
@@ -24,13 +24,14 @@ function FormSignIn({ onLogin, triggerEvent }) {
         if (isLoggedIn === 'true') {
             // Jika pengguna sudah login sebelumnya, arahkan mereka ke halaman beranda
             triggerEvent(2);
+            navigate('/');
         }
-    }, [triggerEvent]);
+    }, [triggerEvent, navigate]);
 
     useEffect(() => {
         const identifier = setTimeout(() => {
             setFormIsValid(
-                enteredEmail.includes("@") && enteredPassword.trim().length > 6
+                enteredEmail.includes("@") && enteredPassword.trim().length > 5
             );
         }, 500);
 
@@ -55,27 +56,37 @@ function FormSignIn({ onLogin, triggerEvent }) {
         setPasswordIsValid(true);
     };
 
-    const checkCredentials = () => {
-        const { email, password } = dummyData;
-        return enteredEmail === email && enteredPassword === password;
-    };
-
-    const submitHandler = (event) => {
+    const submitHandler = async (event) => {
         event.preventDefault();
 
-        if (enteredPassword.trim().length < 6) {
+        if (enteredPassword.trim().length < 5) {
             setPasswordIsValid(false);
             return;
         }
 
-        if (checkCredentials()) {
-            // Set status login pengguna menjadi true di localStorage
+        try {
+            const response = await axios.post('https://dietku-api.up.railway.app/api/login', {
+                email: enteredEmail,
+                password: enteredPassword
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json'
+                }
+            });
+
+            const token = response.data.token;
+
+            // Set status login pengguna dan JWT token di localStorage
             localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('token', token);
+
             onLogin(enteredEmail, enteredPassword);
             setLoginError("");
-    
-            
-        } else {
+
+            // Redirect to homepage
+            navigate('/');
+        } catch (error) {
             setLoginError("Invalid email or password. Please try again.");
         }
     };
